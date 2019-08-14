@@ -5,7 +5,7 @@ const { getUserInfoById } = require('./user');
 
 const app = express();
 
-const CALLBACK_URL = 'http://buzzport.gatech.edu/callback';
+const CALLBACK_URL = 'http://buzzport.gatech.edu/landing';
 
 app.get('/login', (req, res) => {
   res.redirect(`https://login.gatech.edu/cas/login?service=${
@@ -13,7 +13,7 @@ app.get('/login', (req, res) => {
   }`);
 });
 
-app.get('/callback', (req, res) => {
+app.get('/landing', (req, res) => {
   let ticket = req.query.ticket;
   console.log('Got ticket:', ticket);
 
@@ -37,10 +37,14 @@ app.get('/callback', (req, res) => {
         })
 
       } else {
-        res.send('Login failed');
+        res.send(`
+          <h3>You are logged out</h3>
+          <a href="/login">Go to Login Page</a>
+        `);
       }
     });
   });
 });
 
+app.get('*', (req, res) => res.redirect('/landing'));
 app.listen(80, () => console.log('Listening on port 80'));
