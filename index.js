@@ -32,13 +32,24 @@ app.get('/landing', (req, res) => {
       if (result['cas:serviceResponse']['cas:authenticationSuccess']) {
 
         let username = result['cas:serviceResponse']['cas:authenticationSuccess'][0]['cas:user'][0];
-        getUserInfoById(username).then(info => {
-          res.send(`<pre>${JSON.stringify(info, undefined, 2)}</pre>`);
+        getUserInfoById('conte').then(info => {
+          // console.log(info)
+          res.send(`
+            <h1>${info[0].displayName.split(',').reverse().join(' ')}</h1>
+            <h2>${info[0].title}, ${info[0].ou}</h2>
+            ${info[0].postOfficeBox ? `<p>P.O. Box: ${info[0].postOfficeBox}</p>` : ''}
+            ${info[0].telephoneNumber ? `<p>Phone Number: ${info[0].telephoneNumber}</p>` : ''}
+            <b>Raw Data:</b>
+            <pre>${JSON.stringify(info, undefined, 2)}</pre>
+          `)
+        }, (reason) => {
+          console.log(reason);
+          res.send(`<p>${reason}</p>`);
         })
 
       } else {
         res.send(`
-          <h3>You are logged out</h3>
+          <h1>Please Log In</h1>
           <a href="/login">Go to Login Page</a>
         `);
       }
