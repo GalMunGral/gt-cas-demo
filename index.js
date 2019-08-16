@@ -5,7 +5,7 @@ const { getUserInfoById } = require('./user');
 
 const app = express();
 
-const CALLBACK_URL = 'http://buzzport.gatech.edu/landing';
+const CALLBACK_URL = 'http://openeval.gatech.edu/landing';
 
 app.get('/login', (req, res) => {
   res.redirect(`https://login.gatech.edu/cas/login?service=${
