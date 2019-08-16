@@ -32,7 +32,7 @@ app.get('/landing', (req, res) => {
       if (result['cas:serviceResponse']['cas:authenticationSuccess']) {
 
         let username = result['cas:serviceResponse']['cas:authenticationSuccess'][0]['cas:user'][0];
-        getUserInfoById('conte').then(info => {
+        getUserInfoById(username).then(info => {
           // console.log(info)
           res.send(`
             <h1>${info[0].displayName.split(',').reverse().join(' ')}</h1>
