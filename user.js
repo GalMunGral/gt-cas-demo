@@ -9,6 +9,7 @@ module.exports.getUserInfoById = function(id) {
     client.bind('', '', (err) => {
       if (err) {
         console.log('error: ', err);
+        client.unbind();
         return
       }
       client.search('dc=whitepages,dc=gatech,dc=edu', {
@@ -17,6 +18,7 @@ module.exports.getUserInfoById = function(id) {
       }, (err, res) => {
         if (err) {
           console.log('error: ', err);
+          client.unbind();
           return
         }
         let result = [];
@@ -25,6 +27,7 @@ module.exports.getUserInfoById = function(id) {
         });
         res.on('error', (err) => {
           console.error('error: ' + err.message);
+          client.unbind();
         });
         res.on('end', () => {
           if (result.length > 0) {
@@ -32,9 +35,7 @@ module.exports.getUserInfoById = function(id) {
           } else {
             reject('Search failed');
           }
-          client.unbind(err => {
-            if (err) console.log(err)
-          });
+          client.unbind();
         });
       });
     });
