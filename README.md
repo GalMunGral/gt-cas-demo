@@ -3,6 +3,6 @@
 2. Go to `login.gatech.edu` and log out.
 3. Start the server (requires Node.js):
 ```bash
-git clone https://github.gatech.edu/whe47/temp.git && cd temp && npm install && npm start
+git clone https://github.com/GalMunGral/cas-demo.git && cd temp && npm install && npm start
 ```
 3. Visit `http://openeval.gatech.edu` (No HTTPS)
