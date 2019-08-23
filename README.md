@@ -6,3 +6,6 @@
 git clone https://github.com/GalMunGral/cas-demo.git && cd temp && npm install && npm start
 ```
 3. Visit `http://openeval.gatech.edu` (No HTTPS)
+
+## Issues
+[ldapjs](https://github.com/ldapjs/node-ldapjs) currently does not support Windows: https://github.com/ldapjs/node-ldapjs/issues/79
